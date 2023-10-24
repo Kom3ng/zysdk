@@ -8,5 +8,7 @@ public class RequestUtils {
         this.httpClient = httpClient;
     }
 
-
+    public ApiRequestBuilder requestBuilder(){
+        return new ApiRequestBuilder();
+    }
 }

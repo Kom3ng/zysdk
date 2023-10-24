@@ -11,42 +11,42 @@ import java.util.Objects;
 
 public class ApiUrls {
     private static final String API_DISCOVERY = "https://hagateway.zykj.org/api/discovery/sxz";
-    private String API_HOST = null;
-    private final String LOGIN;
-    private final String GET_INFO_ASYNC;
-    private final String GET_MY_INFO_ASYNC;
-    private final String GET_Q_WEATHER_ASYNC;
-    private final String GET_SYSTEM_SETTINGS_FOR_STUDENT_ASYNC;
-    private final String GET_ALL_SETTINGS;
-    private final String GET_MY_MESSAGE_LIST_ASYNC;
-    private final String SET_MESSAGE_READ_ASYNC;
-    private final String GET_NOTICE_ASYNC;
-    private final String GET_MY_UNREAD_MESSAGE_COUNT_ASYNC;
-    private final String GET_ALL_COMMON_WEB_SITE_ASYNC;
-    private final String GET_ALL_WHITE_URL_ASYNC;
-    private final String GET_MY_TOPICS;
-    private final String COURSES_SUBSCRIBED;
-    private final String GENERATOR_TOKEN_ASYNC;
-    private final String GET_DN_URL;
-    private final String CAN_I_OPEN_CAMERA_ASYNC;
-    private final String RECORD_PICTURES_ASYNC;
-    private final String CHECK_UPDATE_ASYNC;
-    private final String GET_MY_TAGS;
-    private final String MULTI_REMOVE_MISTAKE_ITEMS_ASYNC;
-    private final String GET_MISTAKE_QST_ITEM_DETAIL_INFO_ASYNC;
-    private final String SEARCH_MISTAKE_QST_ITEMS_ASYNC;
-    private final String GET_MY_MISTAKE_BOOKS_ASYNC;
-    private final String GET_CATALOGS;
-    private final String GET_QUORA_STUDENT_TOPICS_ASYNC;
-    private final String GET_SESSIONS;
-    private final String DELETE_CATALOG;
-    private final String ADD_CATALOG;
-    private final String SEARCH_QUORA;
-    private final String CREATE_SESSION;
+    private static String API_HOST = null;
+    public static final String LOGIN;
+    public static final String GET_INFO_ASYNC;
+    public static final String GET_MY_INFO_ASYNC;
+    public static final String GET_Q_WEATHER_ASYNC;
+    public static final String GET_SYSTEM_SETTINGS_FOR_STUDENT_ASYNC;
+    public static final String GET_ALL_SETTINGS;
+    public static final String GET_MY_MESSAGE_LIST_ASYNC;
+    public static final String SET_MESSAGE_READ_ASYNC;
+    public static final String GET_NOTICE_ASYNC;
+    public static final String GET_MY_UNREAD_MESSAGE_COUNT_ASYNC;
+    public static final String GET_ALL_COMMON_WEB_SITE_ASYNC;
+    public static final String GET_ALL_WHITE_URL_ASYNC;
+    public static final String GET_MY_TOPICS;
+    public static final String COURSES_SUBSCRIBED;
+    public static final String GENERATOR_TOKEN_ASYNC;
+    public static final String GET_DN_URL;
+    public static final String CAN_I_OPEN_CAMERA_ASYNC;
+    public static final String RECORD_PICTURES_ASYNC;
+    public static final String CHECK_UPDATE_ASYNC;
+    public static final String GET_MY_TAGS;
+    public static final String MULTI_REMOVE_MISTAKE_ITEMS_ASYNC;
+    public static final String GET_MISTAKE_QST_ITEM_DETAIL_INFO_ASYNC;
+    public static final String SEARCH_MISTAKE_QST_ITEMS_ASYNC;
+    public static final String GET_MY_MISTAKE_BOOKS_ASYNC;
+    public static final String GET_CATALOGS;
+    public static final String GET_QUORA_STUDENT_TOPICS_ASYNC;
+    public static final String GET_SESSIONS;
+    public static final String DELETE_CATALOG;
+    public static final String ADD_CATALOG;
+    public static final String SEARCH_QUORA;
+    public static final String CREATE_SESSION;
 
 
 
-    private ApiUrls(){
+    static {
         initApiHost();
 
         LOGIN = byPath("/api/TokenAuth/Login");
@@ -82,18 +82,14 @@ public class ApiUrls {
         CREATE_SESSION = byPath("/api/services/app/Quora/CreateSession");
     }
 
-    public static ApiUrls defaultApiUrls(){
-        return new ApiUrls();
-    }
-
-    private String byPath(String path){
+    private static String byPath(String path){
         return API_HOST + path;
     }
 
-    private void initApiHost() {
+    private static void initApiHost() {
         OkHttpClient httpClient = new OkHttpClient();
         Request request = new Request.Builder()
-                .url(getAPI_DISCOVERY())
+                .url(API_DISCOVERY)
                 .get()
                 .build();
 
@@ -103,134 +99,5 @@ public class ApiUrls {
         } catch (IOException | NullPointerException e) {
             throw new RuntimeException("exception when init api urls: "+e);
         }
-    }
-
-
-    public String getAPI_DISCOVERY() {
-        return API_DISCOVERY;
-    }
-
-    public String getLOGIN() {
-        return LOGIN;
-    }
-
-    public String getGET_INFO_ASYNC() {
-        return GET_INFO_ASYNC;
-    }
-
-    public String getGET_MY_INFO_ASYNC() {
-        return GET_MY_INFO_ASYNC;
-    }
-
-    public String getGET_Q_WEATHER_ASYNC() {
-        return GET_Q_WEATHER_ASYNC;
-    }
-
-    public String getGET_SYSTEM_SETTINGS_FOR_STUDENT_ASYNC() {
-        return GET_SYSTEM_SETTINGS_FOR_STUDENT_ASYNC;
-    }
-
-    public String getGET_ALL_SETTINGS() {
-        return GET_ALL_SETTINGS;
-    }
-
-    public String getGET_MY_MESSAGE_LIST_ASYNC() {
-        return GET_MY_MESSAGE_LIST_ASYNC;
-    }
-
-    public String getSET_MESSAGE_READ_ASYNC() {
-        return SET_MESSAGE_READ_ASYNC;
-    }
-
-    public String getGET_NOTICE_ASYNC() {
-        return GET_NOTICE_ASYNC;
-    }
-
-    public String getGET_MY_UNREAD_MESSAGE_COUNT_ASYNC() {
-        return GET_MY_UNREAD_MESSAGE_COUNT_ASYNC;
-    }
-
-    public String getGET_ALL_COMMON_WEB_SITE_ASYNC() {
-        return GET_ALL_COMMON_WEB_SITE_ASYNC;
-    }
-
-    public String getGET_ALL_WHITE_URL_ASYNC() {
-        return GET_ALL_WHITE_URL_ASYNC;
-    }
-
-    public String getGET_MY_TOPICS() {
-        return GET_MY_TOPICS;
-    }
-
-    public String getCOURSES_SUBSCRIBED() {
-        return COURSES_SUBSCRIBED;
-    }
-
-    public String getGENERATOR_TOKEN_ASYNC() {
-        return GENERATOR_TOKEN_ASYNC;
-    }
-
-    public String getGET_DN_URL() {
-        return GET_DN_URL;
-    }
-
-    public String getCAN_I_OPEN_CAMERA_ASYNC() {
-        return CAN_I_OPEN_CAMERA_ASYNC;
-    }
-
-    public String getRECORD_PICTURES_ASYNC() {
-        return RECORD_PICTURES_ASYNC;
-    }
-
-    public String getCHECK_UPDATE_ASYNC() {
-        return CHECK_UPDATE_ASYNC;
-    }
-
-    public String getGET_MY_TAGS() {
-        return GET_MY_TAGS;
-    }
-
-    public String getMULTI_REMOVE_MISTAKE_ITEMS_ASYNC() {
-        return MULTI_REMOVE_MISTAKE_ITEMS_ASYNC;
-    }
-
-    public String getGET_MISTAKE_QST_ITEM_DETAIL_INFO_ASYNC() {
-        return GET_MISTAKE_QST_ITEM_DETAIL_INFO_ASYNC;
-    }
-
-    public String getSEARCH_MISTAKE_QST_ITEMS_ASYNC() {
-        return SEARCH_MISTAKE_QST_ITEMS_ASYNC;
-    }
-
-    public String getGET_MY_MISTAKE_BOOKS_ASYNC() {
-        return GET_MY_MISTAKE_BOOKS_ASYNC;
-    }
-
-    public String getGET_CATALOGS() {
-        return GET_CATALOGS;
-    }
-
-    public String getGET_QUORA_STUDENT_TOPICS_ASYNC() {
-        return GET_QUORA_STUDENT_TOPICS_ASYNC;
-    }
-
-    public String getGET_SESSIONS() {
-        return GET_SESSIONS;
-    }
-
-    public String getDELETE_CATALOG() {
-        return DELETE_CATALOG;
-    }
-
-    public String getADD_CATALOG() {
-        return ADD_CATALOG;
-    }
-
-    public String getSEARCH_QUORA() {
-        return SEARCH_QUORA;
-    }
-
-    public String getCREATE_SESSION() {
-        return CREATE_SESSION;
     }
 }

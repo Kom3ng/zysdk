@@ -4,28 +4,29 @@ import okhttp3.OkHttpClient;
 import org.abstruck.zysdk.api.*;
 
 public class ApiImpl implements Api {
-    private ApiUrls apiUrls;
     private OkHttpClient httpClient;
-    public ApiImpl(OkHttpClient httpClient, ApiUrls apiUrls){
-        this.apiUrls = apiUrls;
+    private ManageApi manageApi;
+    private MistakeBookApi mistakeBookApi;
+    private QuoraApi quoraApi;
+    public ApiImpl(OkHttpClient httpClient){
         this.httpClient = httpClient;
-    }
-    public ApiImpl defualtApiImpl(){
-        return new ApiImpl(new OkHttpClient(),ApiUrls.defaultApiUrls());
+        this.manageApi = new ManageApiImpl(httpClient);
+        this.mistakeBookApi = new MistakeBookApiImpl(httpClient);
+        this.quoraApi = new QuoraApiImpl(httpClient);
     }
     @Override
     public ManageApi manage() {
-        return null;
+        return manageApi;
     }
 
     @Override
     public MistakeBookApi mistakeBook() {
-        return null;
+        return mistakeBookApi;
     }
 
     @Override
     public QuoraApi quora() {
-        return null;
+        return quoraApi;
     }
 
 }
