@@ -1,12 +1,28 @@
 package org.abstruck.zysdk.api;
 
+import org.abstruck.zysdk.data.req.GetMessageRequest;
 import org.abstruck.zysdk.data.req.LoginRequest;
-import org.abstruck.zysdk.data.resp.StudentInfo;
-import org.abstruck.zysdk.data.resp.TokenInfo;
-import org.abstruck.zysdk.data.resp.UserInfo;
+import org.abstruck.zysdk.data.req.RecordPicturesRequest;
+import org.abstruck.zysdk.data.resp.*;
 
 public interface ManageApi {
     TokenInfo login(LoginRequest loginRequest);
-    UserInfo userInfo(String token);
-    StudentInfo studentInfo(String token);
+    UserInfo getUserInfo(String token);
+    StudentInfo getStudentInfo(String token);
+    WeatherReport getQWeatherReport(String token);
+    StudentSetting getStudentSetting(String token);
+    AllSettings getAllSettings(String token);
+    MessageList getMessageList(String token, GetMessageRequest request);
+    Notice getNotice(String token,Integer id);
+    UnreadMessageInfo[] getUnreadMessageCount(String token);
+    // TODO
+    Object[] getAllCommonUrls(String token);
+    String getAllWhiteUrls(String token);
+    Topic[] getMyTopics(String token);
+    Course[] getSubscribedCourses(String token);
+    OssInfo generateOssToken(String token);
+    String getDnUrl(String token);
+    Boolean canIOpenCamera(String token,String packageName);
+    Void recordPicture(String token, RecordPicturesRequest request);
+    VersionInfo checkUpdate(String packageName,Integer appType);
 }
