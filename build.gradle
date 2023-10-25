@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'org.abstruck.zysdk'
-version = '1.0-SNAPSHOT'
+version = '0.1.0'
 
 repositories {
     maven { url 'https://maven.aliyun.com/repository/public/' }
@@ -25,9 +25,9 @@ test {
 publishing {
     publications {
         maven(MavenPublication){
-            groupId = 'io.github.kom3ng.zysdk'
+            groupId = 'org.abstruck.zysdk'
             artifactId = 'zysdk'
-            version = '0.0.1'
+            version = '0.1.0'
 
             from components.java
         }

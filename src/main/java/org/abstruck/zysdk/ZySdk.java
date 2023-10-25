@@ -18,6 +18,8 @@ public class ZySdk {
     public static ZySdk init(OkHttpClient okHttpClient){
         return new ZySdk(okHttpClient);
     }
+    @NotNull
+    @Contract(" -> new")
     public static ZySdk init(){
         return init(new OkHttpClient());
     }
