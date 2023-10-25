@@ -58,18 +58,27 @@ public class ApiRequestBuilder {
     public ApiRequestBuilder post(Object data){
         return post(gson.toJson(data));
     }
+    public ApiRequestBuilder appName(String appName){
+        return header("AppName",appName);
+    }
+    public ApiRequestBuilder appVersion(String appVersion){
+        return header("AppVersion",appVersion);
+    }
 
     public RequestExecutor buildToExecutor(OkHttpClient httpClient){
         return new RequestExecutor(httpClient,build());
     }
     public Request build(){
-        headers.forEach((k,v) -> builder.addHeader(k,v));
+        headers.forEach(builder::addHeader);
         if (!queryParams.isEmpty()){
             StringBuilder sb = new StringBuilder(url).append('?');
-            queryParams.forEach((k,v) -> sb.append(k).append('=').append(v));
+            queryParams.forEach((k,v) -> sb.append(k).append('=').append(v).append('&'));
+            sb.deleteCharAt(sb.length()-1);
             url = sb.toString();
         }
         builder.url(url);
         return builder.build();
     }
+
+
 }

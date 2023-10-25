@@ -1,6 +1,7 @@
 package org.abstruck.zysdk.util;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -49,7 +50,7 @@ public class RequestExecutor {
         return executeWithResult(resp -> {
             JsonObject jsonObject = gson.fromJson(Objects.requireNonNull(resp.body()).string(), JsonObject.class);
             if (jsonObject.get("success").getAsBoolean()) {
-                JsonObject result = jsonObject.get("result").getAsJsonObject();
+                JsonElement result = jsonObject.get("result");
                 if (result != null){
                     return gson.fromJson(result.toString(),clazz);
                 }

@@ -11,14 +11,19 @@ import org.abstruck.zysdk.util.ApiRequestBuilder;
 
 public class ManageApiImpl implements ManageApi {
     private final OkHttpClient httpClient;
+    private static final String appName = "com.zykj.manage";
+    private final String appVersion;
     public ManageApiImpl(OkHttpClient httpClient){
         this.httpClient = httpClient;
+        appVersion = checkUpdate(appName,0).appVersionId().toString();
     }
     @Override
     public TokenInfo login(LoginRequest loginRequest) {
         return new ApiRequestBuilder()
                 .url(ApiUrls.LOGIN)
                 .post(loginRequest)
+                .header("AppName",appName)
+                .header("AppVersion",appVersion)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(TokenInfo.class);
 
@@ -29,6 +34,8 @@ public class ManageApiImpl implements ManageApi {
         return new ApiRequestBuilder()
                 .url(ApiUrls.GET_INFO_ASYNC)
                 .get()
+                .header("AppName",appName)
+                .header("AppVersion",appVersion)
                 .authorize(token)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(UserInfo.class);
@@ -39,6 +46,8 @@ public class ManageApiImpl implements ManageApi {
         return new ApiRequestBuilder()
                 .url(ApiUrls.GET_MY_INFO_ASYNC)
                 .get()
+                .header("AppName",appName)
+                .header("AppVersion",appVersion)
                 .authorize(token)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(StudentInfo.class);
@@ -49,6 +58,8 @@ public class ManageApiImpl implements ManageApi {
         return new ApiRequestBuilder()
                 .url(ApiUrls.GET_Q_WEATHER_ASYNC)
                 .get()
+                .header("AppName",appName)
+                .header("AppVersion",appVersion)
                 .authorize(token)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(WeatherReport.class);
@@ -59,6 +70,8 @@ public class ManageApiImpl implements ManageApi {
         return new ApiRequestBuilder()
                 .url(ApiUrls.GET_ALL_SETTINGS)
                 .get()
+                .header("AppName",appName)
+                .header("AppVersion",appVersion)
                 .authorize(token)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(StudentSetting.class);
@@ -69,6 +82,8 @@ public class ManageApiImpl implements ManageApi {
         return new ApiRequestBuilder()
                 .url(ApiUrls.GET_ALL_SETTINGS)
                 .get()
+                .header("AppName",appName)
+                .header("AppVersion",appVersion)
                 .authorize(token)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(AllSettings.class);
@@ -79,6 +94,8 @@ public class ManageApiImpl implements ManageApi {
         return new ApiRequestBuilder()
                 .url(ApiUrls.GET_MY_MESSAGE_LIST_ASYNC)
                 .post(request)
+                .header("AppName",appName)
+                .header("AppVersion",appVersion)
                 .authorize(token)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(MessageList.class);
@@ -90,6 +107,8 @@ public class ManageApiImpl implements ManageApi {
                 .url(ApiUrls.GET_NOTICE_ASYNC)
                 .authorize(token)
                 .get()
+                .header("AppName",appName)
+                .header("AppVersion",appVersion)
                 .queryParam("id",id.toString())
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(Notice.class);
@@ -100,6 +119,8 @@ public class ManageApiImpl implements ManageApi {
         return new ApiRequestBuilder()
                 .url(ApiUrls.GET_MY_UNREAD_MESSAGE_COUNT_ASYNC)
                 .get()
+                .header("AppName",appName)
+                .header("AppVersion",appVersion)
                 .authorize(token)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(UnreadMessageInfo[].class);
@@ -110,6 +131,8 @@ public class ManageApiImpl implements ManageApi {
         return new ApiRequestBuilder()
                 .url(ApiUrls.GET_ALL_COMMON_WEB_SITE_ASYNC)
                 .get()
+                .header("AppName",appName)
+                .header("AppVersion",appVersion)
                 .authorize(token)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(Object[].class);
@@ -120,6 +143,8 @@ public class ManageApiImpl implements ManageApi {
         return new ApiRequestBuilder()
                 .url(ApiUrls.GET_ALL_WHITE_URL_ASYNC)
                 .get()
+                .header("AppName",appName)
+                .header("AppVersion",appVersion)
                 .authorize(token)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(String.class);
@@ -127,7 +152,14 @@ public class ManageApiImpl implements ManageApi {
 
     @Override
     public Topic[] getMyTopics(String token) {
-        return new Topic[0];
+        return new ApiRequestBuilder()
+                .url(ApiUrls.GET_MY_TOPICS)
+                .header("AppName",appName)
+                .header("AppVersion",appVersion)
+                .authorize(token)
+                .get()
+                .buildToExecutor(httpClient)
+                .apiExecuteWithResult(Topic[].class);
     }
 
     @Override
@@ -135,6 +167,8 @@ public class ManageApiImpl implements ManageApi {
         return new ApiRequestBuilder()
                 .url(ApiUrls.COURSES_SUBSCRIBED)
                 .post("")
+                .appName(appName)
+                .appVersion(appVersion)
                 .authorize(token)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(Course[].class);
@@ -144,6 +178,8 @@ public class ManageApiImpl implements ManageApi {
     public OssInfo generateOssToken(String token) {
         return new ApiRequestBuilder()
                 .url(ApiUrls.GENERATOR_TOKEN_ASYNC)
+                .appName(appName)
+                .appVersion(appVersion)
                 .get()
                 .authorize(token)
                 .buildToExecutor(httpClient)
@@ -165,6 +201,8 @@ public class ManageApiImpl implements ManageApi {
         return new ApiRequestBuilder()
                 .url(ApiUrls.CAN_I_OPEN_CAMERA_ASYNC)
                 .authorize(token)
+                .appName(appName)
+                .appVersion(appVersion)
                 .get()
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(Boolean.class);
@@ -176,6 +214,8 @@ public class ManageApiImpl implements ManageApi {
                 .url(ApiUrls.RECORD_PICTURES_ASYNC)
                 .post(request)
                 .authorize(token)
+                .appName(appName)
+                .appVersion(appVersion)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(Void.class);
     }

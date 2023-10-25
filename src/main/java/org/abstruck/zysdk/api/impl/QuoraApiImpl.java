@@ -14,14 +14,19 @@ import org.abstruck.zysdk.util.ApiRequestBuilder;
 
 public class QuoraApiImpl implements QuoraApi {
     private final OkHttpClient httpClient;
-    public QuoraApiImpl(OkHttpClient httpClient){
+    public static final String appName = "com.zykj.student.dialogue";
+    private final String appVersion;
+    public QuoraApiImpl(OkHttpClient httpClient,String appVersion){
         this.httpClient = httpClient;
+        this.appVersion = appVersion;
     }
     @Override
     public Catalog[] getCatalogs(String token) {
         return new ApiRequestBuilder()
                 .url(ApiUrls.GET_CATALOGS)
                 .get()
+                .appName(appName)
+                .appVersion(appVersion)
                 .authorize(token)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(Catalog[].class);
@@ -32,6 +37,8 @@ public class QuoraApiImpl implements QuoraApi {
         return new ApiRequestBuilder()
                 .url(ApiUrls.GET_QUORA_STUDENT_TOPICS_ASYNC)
                 .get()
+                .appName(appName)
+                .appVersion(appVersion)
                 .authorize(token)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(QuoraTopic[].class);
@@ -42,6 +49,8 @@ public class QuoraApiImpl implements QuoraApi {
         return new ApiRequestBuilder()
                 .url(ApiUrls.GET_SESSIONS)
                 .post(request)
+                .appName(appName)
+                .appVersion(appVersion)
                 .authorize(token)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(Session[].class);
@@ -49,7 +58,14 @@ public class QuoraApiImpl implements QuoraApi {
 
     @Override
     public Void deleteCatalog(String token, Integer id) {
-        return null;
+        return new ApiRequestBuilder()
+                .url(ApiUrls.DELETE_CATALOG)
+                .appName(appName)
+                .appVersion(appVersion)
+                .get()
+                .queryParam("id",id.toString())
+                .buildToExecutor(httpClient)
+                .apiExecuteWithResult(Void.class);
     }
 
     @Override
@@ -57,6 +73,8 @@ public class QuoraApiImpl implements QuoraApi {
         return new ApiRequestBuilder()
                 .url(ApiUrls.ADD_CATALOG)
                 .post(request)
+                .appName(appName)
+                .appVersion(appVersion)
                 .authorize(token)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(Integer.class);
@@ -67,6 +85,8 @@ public class QuoraApiImpl implements QuoraApi {
         return new ApiRequestBuilder()
                 .url(ApiUrls.SEARCH_QUORA)
                 .authorize(token)
+                .appName(appName)
+                .appVersion(appVersion)
                 .post(request)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(Object[].class);
@@ -77,6 +97,8 @@ public class QuoraApiImpl implements QuoraApi {
         return new ApiRequestBuilder()
                 .url(ApiUrls.CREATE_SESSION)
                 .post(request)
+                .appName(appName)
+                .appVersion(appVersion)
                 .authorize(token)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(Integer.class);

@@ -13,13 +13,18 @@ import org.abstruck.zysdk.util.ApiRequestBuilder;
 
 public class MistakeBookApiImpl implements MistakeBookApi {
     private final OkHttpClient httpClient;
-    public MistakeBookApiImpl(OkHttpClient httpClient){
+    public static final String appName = "com.zykj.mistake";
+    private final String appVersion;
+    public MistakeBookApiImpl(OkHttpClient httpClient,String appVersion){
         this.httpClient = httpClient;
+        this.appVersion = appVersion;
     }
     @Override
     public Tag[] getMyTags(String token) {
         return new ApiRequestBuilder()
                 .url(ApiUrls.GET_MY_TAGS)
+                .appName(appName)
+                .appVersion(appVersion)
                 .get()
                 .authorize(token)
                 .buildToExecutor(httpClient)
@@ -31,6 +36,8 @@ public class MistakeBookApiImpl implements MistakeBookApi {
         return new ApiRequestBuilder()
                 .url(ApiUrls.MULTI_REMOVE_MISTAKE_ITEMS_ASYNC)
                 .post(request)
+                .appName(appName)
+                .appVersion(appVersion)
                 .authorize(token)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(Void.class);
@@ -39,6 +46,8 @@ public class MistakeBookApiImpl implements MistakeBookApi {
     @Override
     public QstInfo getMistakeQstItemDetailInfo(String token, Integer itemId) {
         return new ApiRequestBuilder()
+                .appName(appName)
+                .appVersion(appVersion)
                 .url(ApiUrls.GET_MISTAKE_QST_ITEM_DETAIL_INFO_ASYNC)
                 .authorize(token)
                 .queryParam("itemId",itemId.toString())
@@ -56,6 +65,8 @@ public class MistakeBookApiImpl implements MistakeBookApi {
         return new ApiRequestBuilder()
                 .url(ApiUrls.SEARCH_MISTAKE_QST_ITEMS_ASYNC)
                 .post(request)
+                .appName(appName)
+                .appVersion(appVersion)
                 .authorize(token)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(Qsts.class);
@@ -67,6 +78,8 @@ public class MistakeBookApiImpl implements MistakeBookApi {
                 .url(ApiUrls.GET_MY_MISTAKE_BOOKS_ASYNC)
                 .authorize(token)
                 .get()
+                .appName(appName)
+                .appVersion(appVersion)
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(MistakeBook[].class);
     }
