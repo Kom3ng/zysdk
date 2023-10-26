@@ -15,6 +15,7 @@ import org.abstruck.zysdk.util.ApiRequestBuilder;
 public class QuoraApiImpl implements QuoraApi {
     private final OkHttpClient httpClient;
     public static final String appName = "com.zykj.student.dialogue";
+    public static final String packageName = "com.zykj.student.dialogue";
     private final String appVersion;
     public QuoraApiImpl(OkHttpClient httpClient,String appVersion){
         this.httpClient = httpClient;

@@ -9,8 +9,8 @@ public class ApiImpl implements Api {
     private final QuoraApi quoraApi;
     public ApiImpl(OkHttpClient httpClient){
         this.manageApi = new ManageApiImpl(httpClient);
-        final String mistakeBookVersion = manage().checkUpdate(MistakeBookApiImpl.appName, 0).appVersionId().toString();
-        final String quoraVersion = manage().checkUpdate(QuoraApiImpl.appName,0).appVersionId().toString();
+        final String mistakeBookVersion = manage().checkUpdate(MistakeBookApiImpl.packageName, 0).appVersionId().toString();
+        final String quoraVersion = manage().checkUpdate(QuoraApiImpl.packageName,0).appVersionId().toString();
         this.mistakeBookApi = new MistakeBookApiImpl(httpClient,mistakeBookVersion);
         this.quoraApi = new QuoraApiImpl(httpClient,quoraVersion);
     }

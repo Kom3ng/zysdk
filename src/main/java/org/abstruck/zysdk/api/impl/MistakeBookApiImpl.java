@@ -13,7 +13,8 @@ import org.abstruck.zysdk.util.ApiRequestBuilder;
 
 public class MistakeBookApiImpl implements MistakeBookApi {
     private final OkHttpClient httpClient;
-    public static final String appName = "com.zykj.mistake";
+    public static final String appName = "Mistake";
+    public static final String packageName = "com.zykj.mistake";
     private final String appVersion;
     public MistakeBookApiImpl(OkHttpClient httpClient,String appVersion){
         this.httpClient = httpClient;

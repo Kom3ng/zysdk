@@ -18,12 +18,19 @@ public class ManageApiTest {
         System.out.println(info);
     }
     @Test
-    public void testSomeApi(){
+    public void testQuoraApi(){
         Api api = ZySdk.init().getApi();
         ManageApi manageApi = api.manage();
         String token = manageApi.login(new LoginRequest("22zhoumoxixuan", "123456", 1)).accessToken();
         Catalog[] catalogs = api.quora().getCatalogs(token);
         System.out.println(Arrays.toString(catalogs));
+    }
+    @Test
+    public void testMistakeApi(){
+        Api api = ZySdk.init().getApi();
+        ManageApi manageApi = api.manage();
+        String token = manageApi.login(new LoginRequest("22zhoumoxixuan", "123456", 1)).accessToken();
+        System.out.println(Arrays.toString(api.mistakeBook().getMyTags(token)));
     }
 
 }
