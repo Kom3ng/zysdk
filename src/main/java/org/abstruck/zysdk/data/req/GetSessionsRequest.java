@@ -11,8 +11,4 @@ public record GetSessionsRequest(
         Integer topicId,
         TimeFrame updateTime
 ) {
-    public record TimeFrame(
-            String start,
-            String end
-    ){}
 }

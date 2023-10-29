@@ -5,6 +5,7 @@ import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,11 +16,19 @@ public class ApiRequestBuilder {
     private final Map<String,String> queryParams;
     private final Gson gson;
     private String url;
+    private OkHttpClient httpClient;
     public ApiRequestBuilder(){
         builder = new Request.Builder();
         headers = new HashMap<>();
         queryParams = new HashMap<>();
         gson = new Gson();
+    }
+    public ApiRequestBuilder(OkHttpClient httpClient){
+        builder = new Request.Builder();
+        headers = new HashMap<>();
+        queryParams = new HashMap<>();
+        gson = new Gson();
+        this.httpClient = httpClient;
     }
 
     public ApiRequestBuilder url(String url){
@@ -35,11 +44,14 @@ public class ApiRequestBuilder {
         headers.put(k,v);
         return this;
     }
+    public ApiRequestBuilder header(String k, @NotNull Object v){
+        return header(k,v.toString());
+    }
     public ApiRequestBuilder queryParam(String key,String value){
         queryParams.put(key,value);
         return this;
     }
-    public ApiRequestBuilder queryParam(String key,CharSequence value){
+    public ApiRequestBuilder queryParam(String key, @NotNull Object value){
         return queryParam(key,value.toString());
     }
 
@@ -49,8 +61,21 @@ public class ApiRequestBuilder {
     }
     public ApiRequestBuilder post(RequestBody body){
         builder.post(body);
-        header("Content-Type","application/json");
         return this;
+    }
+    public ApiRequestBuilder delete(){
+        builder.method("DELETE",null);
+        return this;
+    }
+    public ApiRequestBuilder delete(Object data){
+        return delete(gson.toJson(data));
+    }
+    public ApiRequestBuilder delete(RequestBody body){
+        builder.method("DELETE",body);
+        return this;
+    }
+    public ApiRequestBuilder delete(String data){
+        return delete(RequestBody.create(data, MediaType.get("application/json")));
     }
     public ApiRequestBuilder post(String data){
         return post(RequestBody.create(data, MediaType.get("application/json")));
@@ -67,6 +92,9 @@ public class ApiRequestBuilder {
 
     public RequestExecutor buildToExecutor(OkHttpClient httpClient){
         return new RequestExecutor(httpClient,build());
+    }
+    public RequestExecutor buildToExecutor(){
+        return new RequestExecutor(this.httpClient,build());
     }
     public Request build(){
         headers.forEach(builder::addHeader);

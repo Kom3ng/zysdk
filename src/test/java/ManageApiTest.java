@@ -1,3 +1,4 @@
+import com.google.gson.Gson;
 import okhttp3.OkHttpClient;
 import org.abstruck.zysdk.ZySdk;
 import org.abstruck.zysdk.api.Api;
@@ -32,5 +33,16 @@ public class ManageApiTest {
         String token = manageApi.login(new LoginRequest("22zhoumoxixuan", "123456", 1)).accessToken();
         System.out.println(Arrays.toString(api.mistakeBook().getMyTags(token)));
     }
+
+    @Test
+    public void testGson(){
+        System.out.println(new Gson().fromJson("{\"a\":1}",TestR.class));
+    }
+
+    record TestR(
+            Integer a,
+            Integer b,
+            String c
+    ){}
 
 }

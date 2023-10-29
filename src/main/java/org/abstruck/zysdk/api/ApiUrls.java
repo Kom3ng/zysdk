@@ -5,6 +5,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.abstruck.zysdk.data.resp.ApiDiscoveryResponse;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -43,8 +45,25 @@ public class ApiUrls {
     public static final String ADD_CATALOG;
     public static final String SEARCH_QUORA;
     public static final String CREATE_SESSION;
-
-
+    public static final String CREATE_OR_UPDATE_TAG;
+    public static final String SET_NOTE;
+    public static final String MULTI_SET_TAGS;
+    public static final String GET_CUSTOM_MISTAKE_QST_ITEM_DETAIL_INFO;
+    public static final String ADD_PICTURE_NOTE;
+    public static final String ADD_IN_MISTAKE_BOOK;
+    public static final String ADD_CUSTOM_MISTAKE_QST_ITEM;
+    public static final String REMOVE_FROM_MISTAKE_BOOK;
+    public static final String GET_SESSION_BY_ID;
+    public static final String GET_MESSAGES;
+    public static final String RESET_READ_STATE;
+    public static final String UPDATE_CATALOG;
+    public static final String GET_COLLECT_SESSIONS;
+    public static final String SET_QUORA_COLLECT;
+    public static final String MY_TASK_COUNT;
+    public static final String GET_STUDENT_TASK_LIST;
+    public static final String GET_REVISING_TASK;
+    public static final String GET_QUESTION_VIEW;
+    public static final String ASK_FOR_HELP;
 
     static {
         initApiHost();
@@ -80,8 +99,29 @@ public class ApiUrls {
         ADD_CATALOG = byPath("/api/services/app/Quora/AddCatalog");
         SEARCH_QUORA = byPath("/api/services/app/Quora/SearchQuora");
         CREATE_SESSION = byPath("/api/services/app/Quora/CreateSession");
+        CREATE_OR_UPDATE_TAG = byPath("/api/services/app/MistakeBook/CreateOrUpdateTagAsync");
+        SET_NOTE = byPath("/api/services/app/MistakeBook/SetNoteAsync");
+        MULTI_SET_TAGS = byPath("/api/services/app/MistakeBook/MultiSetTagsAsync");
+        GET_CUSTOM_MISTAKE_QST_ITEM_DETAIL_INFO = byPath("/api/services/app/MistakeBook/GetCustomMistakeQstItemDetailInfoAsync");
+        ADD_PICTURE_NOTE = byPath("/api/services/app/MistakeBook/AddPictureNoteAsync");
+        ADD_IN_MISTAKE_BOOK = byPath("/api/services/app/MistakeBook/AddInMistakeBookAsync");
+        ADD_CUSTOM_MISTAKE_QST_ITEM = byPath("/api/services/app/MistakeBook/AddCustomMistakeQstItemAsync");
+        REMOVE_FROM_MISTAKE_BOOK = byPath("/api/services/app/MistakeBook/RemoveFromMistakeBookAsync");
+        GET_SESSION_BY_ID = byPath("/api/services/app/Quora/GetSessionById");
+        GET_MESSAGES = byPath("/api/services/app/Quora/GetMessages");
+        RESET_READ_STATE = byPath("/api/services/app/Quora/ResetReadState");
+        UPDATE_CATALOG = byPath("/api/services/app/Quora/UpdateCatalog");
+        GET_COLLECT_SESSIONS = byPath("/api/services/app/Quora/GetCollectSessions");
+        SET_QUORA_COLLECT = byPath("/api/services/app/Quora/SetQuoraCollectAsync");
+        MY_TASK_COUNT = byPath("/api/services/app/Task/MyTaskCountAsync");
+        GET_STUDENT_TASK_LIST = byPath("/api/services/app/Task/GetStudentTaskListAsync");
+        GET_REVISING_TASK = byPath("/api/services/app/Task/GetRevisingTaskAsync");
+        GET_QUESTION_VIEW = byPath("/api/services/app/Task/GetQuestionViewAsync");
+        ASK_FOR_HELP = byPath("/api/services/app/Task/AskForHelpAsync");
     }
 
+    @NotNull
+    @Contract(pure = true)
     private static String byPath(String path){
         return API_HOST + path;
     }

@@ -1,18 +1,20 @@
 package org.abstruck.zysdk.api;
 
-import org.abstruck.zysdk.data.req.GetMessageRequest;
+import org.abstruck.zysdk.data.req.ClientLoginRequest;
+import org.abstruck.zysdk.data.req.GetMessageListRequest;
 import org.abstruck.zysdk.data.req.LoginRequest;
 import org.abstruck.zysdk.data.req.RecordPicturesRequest;
 import org.abstruck.zysdk.data.resp.*;
 
 public interface ManageApi {
     TokenInfo login(LoginRequest loginRequest);
+    TokenInfo login(ClientLoginRequest request);
     UserInfo getUserInfo(String token);
     StudentInfo getStudentInfo(String token);
     WeatherReport getQWeatherReport(String token);
     StudentSetting getStudentSetting(String token);
     AllSettings getAllSettings(String token);
-    MessageList getMessageList(String token, GetMessageRequest request);
+    MessageList getMessageList(String token, GetMessageListRequest request);
     Notice getNotice(String token,Integer id);
     UnreadMessageInfo[] getUnreadMessageCount(String token);
     // TODO

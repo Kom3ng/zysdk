@@ -3,7 +3,8 @@ package org.abstruck.zysdk.api.impl;
 import okhttp3.OkHttpClient;
 import org.abstruck.zysdk.api.ApiUrls;
 import org.abstruck.zysdk.api.ManageApi;
-import org.abstruck.zysdk.data.req.GetMessageRequest;
+import org.abstruck.zysdk.data.req.ClientLoginRequest;
+import org.abstruck.zysdk.data.req.GetMessageListRequest;
 import org.abstruck.zysdk.data.req.LoginRequest;
 import org.abstruck.zysdk.data.req.RecordPicturesRequest;
 import org.abstruck.zysdk.data.resp.*;
@@ -27,6 +28,17 @@ public class ManageApiImpl implements ManageApi {
                 .buildToExecutor(httpClient)
                 .apiExecuteWithResult(TokenInfo.class);
 
+    }
+
+    @Override
+    public TokenInfo login(ClientLoginRequest request) {
+        return new ApiRequestBuilder()
+                .url(ApiUrls.LOGIN)
+                .post(request)
+                .header("AppName",appName)
+                .header("AppVersion",appVersion)
+                .buildToExecutor(httpClient)
+                .apiExecuteWithResult(TokenInfo.class);
     }
 
     @Override
@@ -90,7 +102,7 @@ public class ManageApiImpl implements ManageApi {
     }
 
     @Override
-    public MessageList getMessageList(String token, GetMessageRequest request) {
+    public MessageList getMessageList(String token, GetMessageListRequest request) {
         return new ApiRequestBuilder()
                 .url(ApiUrls.GET_MY_MESSAGE_LIST_ASYNC)
                 .post(request)
